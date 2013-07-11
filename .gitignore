@@ -1,0 +1,15 @@
+.settings/
+.project
+.classpath
+target/
+*.class
+*.jar
+*/.metadata
+*/test-output/
+*/output/
+*.swp
+*/target
+*/.settings/
+*/.project
+*/.classpath
+*/target

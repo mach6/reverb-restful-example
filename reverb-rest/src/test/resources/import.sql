@@ -1,0 +1,1 @@
+INSERT INTO `genre` (`genre_id`, `name`, `enabled`) VALUES (-1, 'All', 'yes'), (0, 'Blues', 'no'), (1, 'Classic Rock', 'no');

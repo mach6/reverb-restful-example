@@ -1,0 +1,2 @@
+INSERT INTO `genre` (`genre_id`, `name`, `enabled`) VALUES (-1, 'All', 'yes'), (0, 'Blues', 'no'), (1, 'Classic Rock', 'no');
+INSERT INTO `artist` (`artist_id`, `name`) VALUES (1, 'BB King'), (2, 'Dave Matthews');
