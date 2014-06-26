@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mach6/reverb-restful-example.svg?branch=master)](https://travis-ci.org/mach6/reverb-restful-example)
+
 reverb-restful-example
 ======================
 
