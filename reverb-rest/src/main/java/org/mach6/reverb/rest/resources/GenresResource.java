@@ -1,3 +1,12 @@
+/*
+ * Copyright (C) 2014 Doug Simmons
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance 
+ * with the License.
+ * 
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0  
+ */
+
 package org.mach6.reverb.rest.resources;
 
 import javax.ws.rs.GET;
@@ -14,11 +23,11 @@ import org.mach6.reverb.models.Genres;
 
 @Path("/genres")
 public class GenresResource {
-    
+
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public Response getGenres() {
-        //call the class in "core" .. no hibernate calls here
+        // call the class in "core" .. no hibernate calls here
         Genres genres = GenresFactory.getAllGenres();
         return Response.ok(genres).build();
     }
@@ -27,7 +36,7 @@ public class GenresResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public Response getGenre(@PathParam("genre_id") int genre_id) {
-        //call the class in "core" .. no hibernate calls here
+        // call the class in "core" .. no hibernate calls here
         Genre genre = GenreFactory.getById(1);
         return Response.ok(genre).build();
     }

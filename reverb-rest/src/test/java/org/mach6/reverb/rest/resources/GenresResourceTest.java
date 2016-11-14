@@ -21,7 +21,7 @@ public class GenresResourceTest extends ResourceTest {
         Response response = resource.getGenre(1);
         assertNotNull(response);
         assertEquals(response.getStatus(), 200, "did not get back HTTP 200 OK");
-        
+
         Genre g = (Genre) response.getEntity();
         assertEquals(g.getGenreId(), 1);
         assertEquals(g.getName(), "Classic Rock");
@@ -33,16 +33,17 @@ public class GenresResourceTest extends ResourceTest {
         Response response = resource.getGenres();
         assertNotNull(response);
         assertEquals(response.getStatus(), 200, "did not get back HTTP 200 OK");
-        
+
         Genres g = (Genres) response.getEntity();
         assertNotNull(g);
         assertEquals(g.getGenres().get(0).getGenreId(), -1);
     }
-    
+
     @Test(groups = "functional")
     public void getGenre() {
         WebResource webResource = resource();
-        ClientResponse response = webResource.path("genres/1").accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        ClientResponse response = webResource.path("genres/1").accept(MediaType.APPLICATION_JSON)
+                .get(ClientResponse.class);
         assertNotNull(response);
         assertEquals(response.getClientResponseStatus(), ClientResponse.Status.OK, "did not get back HTTP 200 OK");
 
@@ -54,10 +55,11 @@ public class GenresResourceTest extends ResourceTest {
     @Test(groups = "functional")
     public void getGenres() {
         WebResource webResource = resource();
-        ClientResponse response = webResource.path("genres").accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        ClientResponse response = webResource.path("genres").accept(MediaType.APPLICATION_JSON)
+                .get(ClientResponse.class);
         assertNotNull(response);
         assertEquals(response.getClientResponseStatus(), ClientResponse.Status.OK, "did not get back HTTP 200 OK");
-        
+
         Genres g = response.getEntity(Genres.class);
         assertNotNull(g);
         assertEquals(g.getGenres().get(0).getGenreId(), -1);

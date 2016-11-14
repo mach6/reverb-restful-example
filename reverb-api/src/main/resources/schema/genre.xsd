@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-	jaxb:version="2.1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:annox="http://annox.dev.java.net" jaxb:extensionBindingPrefixes="annox inheritance"
-	xmlns:jx="http://annox.dev.java.net/javax.persistence"
-	xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance">
+<xs:schema xmlns="" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:annox="http://annox.dev.java.net" jaxb:extensionBindingPrefixes="annox inheritance"
+  xmlns:jx="http://annox.dev.java.net/javax.persistence" xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance">
 
-	<xs:include schemaLocation="reverb.xsd" />
+  <xs:include schemaLocation="reverb.xsd" />
 
-	<xs:element name="genre">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element type="xs:int" name="genre_id" />
-				<xs:element type="xs:string" name="name" />
-				<xs:element type="xs:boolean" name="enabled" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+  <xs:element name="genre">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:int" name="genre_id" />
+        <xs:element type="xs:string" name="name" />
+        <xs:element type="xs:boolean" name="enabled" />
+        <xs:element type="xs:integer" name="times_played" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 
-	<xs:element name="genres">
-		<xs:annotation>
-			<xs:appinfo>
-				<jaxb:class name="genres" />
-				<inheritance:extends>org.mach6.reverb.models.AbstractBaseGenres</inheritance:extends>
-			</xs:appinfo>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="genre" maxOccurs="unbounded" minOccurs="0">
-					<xs:annotation>
-						<xs:appinfo>
-							<jaxb:property name="genres" />
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+  <xs:element name="genres">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:class name="genres" />
+        <inheritance:extends>org.mach6.reverb.models.AbstractBaseGenres</inheritance:extends>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="genre" maxOccurs="unbounded" minOccurs="0">
+          <xs:annotation>
+            <xs:appinfo>
+              <jaxb:property name="genres" />
+            </xs:appinfo>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 
 </xs:schema>

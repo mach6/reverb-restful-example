@@ -20,28 +20,31 @@ import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
 import org.mach6.reverb.core.HibernateUtil;
-import org.mach6.reverb.models.Artist;
-import org.mach6.reverb.models.Artists;
+import org.mach6.reverb.models.UserStat;
+import org.mach6.reverb.models.UserStats;
 
-@Path("/artists")
-public class ArtistsResource {
+@Path("/userstats")
+public class UserStatsResource {
     private static Session session = HibernateUtil.getSessionFactory().openSession();
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response getArtists() {
-        List<Artist> list = session.createQuery("FROM Artist").list();
-        Artists artists = new Artists();
-        artists.setArtist(list);
+    public Response getUserStats() {
+        List<UserStat> list = session.createQuery("FROM UserStat").list();
+        UserStats stats = new UserStats();
+        stats.setUserStat(list);
 
-        return Response.ok(artists).build();
+        return Response.ok(stats).build();
     }
 
-    @Path("/{artist_id}")
+    @Path("/{item_id}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response getArtist(@PathParam("artist_id") int artistId) {
-        Artist artist = (Artist) session.byId(Artist.class).load(artistId);
-        return Response.ok(artist).build();
+    public Response getUserStat(@PathParam("item_id") int itemId) {
+        // TODO Call reverb-core to get a user stat
+        UserStat userStat = new UserStat();
+        userStat.setItemId(itemId);
+
+        return Response.ok(userStat).build();
     }
 }

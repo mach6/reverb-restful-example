@@ -30,7 +30,7 @@ import org.testng.annotations.BeforeSuite;
 
 public class ResourceTest {
     private static Logger logger = LoggerFactory.getLogger(ResourceTest.class);
-    
+
     private static volatile JerseyTest jerseyTestSingleton;
 
     // test server config
@@ -38,15 +38,15 @@ public class ResourceTest {
             .initParam(JSONConfiguration.FEATURE_POJO_MAPPING, "true")
             .initParam(FeaturesAndProperties.FEATURE_FORMATTED, "true")
             .servletPath(ServiceConfig.SERVLET_URI.toString()).build();
-    
+
     private static synchronized JerseyTest getSingleton() {
         if (jerseyTestSingleton != null) {
             return jerseyTestSingleton;
         }
-        
+
         logger.info("Creating JerseyTest Singleton...");
-        
-        try { 
+
+        try {
             jerseyTestSingleton = new JerseyTest(webAppDesc) {
                 @Override
                 public synchronized void setUp() throws Exception {
@@ -54,14 +54,14 @@ public class ResourceTest {
                     // setup the server and test client
                     super.setUp();
                 }
-    
+
                 @Override
                 public synchronized void tearDown() throws Exception {
                     logger.debug("In tearDown(), jerseyTestSingleton");
                     // stop the test client and the server
                     super.tearDown();
                 }
-    
+
                 @Override
                 public int getPort(int defaultPort) {
                     logger.debug("In getPort(), jerseyTestSingleton");
@@ -75,25 +75,25 @@ public class ResourceTest {
                     }
                     return defaultPort;
                 }
-    
+
                 @Override
                 public URI getBaseURI() {
                     logger.debug("In getBaseURI(), jerseyTestSingleton");
                     return UriBuilder.fromUri(ServiceConfig.HTTP_HOST.toString()).port(getPort(8080)).build();
                 }
-    
+
                 @Override
                 public synchronized WebResource resource() {
                     logger.debug("In resource(), jerseyTestSingleton");
                     return super.resource();
                 }
-    
+
                 @Override
                 // test client config
                 public ClientFactory getClientFactory() {
                     logger.info("Creating Client Factory...");
                     return new ClientFactory() {
-                        
+
                         public Client create(ClientConfig clientConfig) {
                             clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, true);
                             clientConfig.getFeatures().put(FeaturesAndProperties.FEATURE_DISABLE_XML_SECURITY, true);
@@ -107,24 +107,24 @@ public class ResourceTest {
         } catch (Exception e) {
             throw new RuntimeException("Unable to start Grizzy server.", e);
         }
-        
+
         return jerseyTestSingleton;
     }
-    
-    @BeforeSuite(alwaysRun=true)
+
+    @BeforeSuite(alwaysRun = true)
     public synchronized void beforeSuite(ITestContext ctx) throws Exception {
         List<String> groups = ctx.getCurrentXmlTest().getIncludedGroups();
         if (groups.isEmpty()) {
             startUp();
         }
-        
+
         for (String group : groups) {
             if (group.equalsIgnoreCase("functional")) {
                 startUp();
             }
         }
     }
-    
+
     private synchronized void startUp() throws Exception {
         jerseyTestSingleton = getSingleton();
         jerseyTestSingleton.setUp();
@@ -134,8 +134,8 @@ public class ResourceTest {
         logger.info("Sleeping for 2 sec ...");
         Thread.sleep(2000);
     }
-    
-    @AfterSuite(alwaysRun=true)
+
+    @AfterSuite(alwaysRun = true)
     public synchronized void afterSuite() throws Exception {
         if (jerseyTestSingleton != null) {
             jerseyTestSingleton.tearDown();
@@ -143,7 +143,7 @@ public class ResourceTest {
     }
 
     public static synchronized WebResource resource() {
-        logger.debug("In resource(), ResourceTest");        
+        logger.debug("In resource(), ResourceTest");
         return jerseyTestSingleton.resource();
     }
 

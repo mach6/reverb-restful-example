@@ -4,10 +4,12 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="org.mach6.reverb.models">
-    <class name="Genre" table="genre">
-        <id name="genreId" column="genre_id" />
+    <class name="Playlist" table="playlist">
+        <id name="playlistId" column="playlist_id" />
         <property name="name" unique="true" />
-        <property name="enabled" />
         <property name="timesPlayed" column="times_played" />
+        <property name="totalTracks" column="total_tracks" />
+        <property name="type" />
+        <property name="userId" column="user_id" />
     </class>
 </hibernate-mapping>

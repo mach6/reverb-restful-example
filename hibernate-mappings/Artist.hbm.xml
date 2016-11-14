@@ -5,7 +5,9 @@
 
 <hibernate-mapping package="org.mach6.reverb.models">
     <class name="Artist" table="artist">
-        <id name="artistId" column="artist_id"/>
-        <property name="name" unique="true"/>
+        <id name="artistId" column="artist_id" />
+        <property name="name" unique="true" />
+        <property name="timesPlayed" column="times_played" />
+        <property name="totalTracks" column="total_tracks" />
     </class>
 </hibernate-mapping>

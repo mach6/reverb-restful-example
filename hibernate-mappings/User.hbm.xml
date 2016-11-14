@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.mach6.reverb.models">
+    <class name="User" table="user">
+        <id name="userId" column="user_id" />
+        <property name="accessLevel" column="access_level" />
+        <property name="email" unique="true" />
+        <property name="fullName" column="full_name" />
+        <property name="lastLoginTime" column="last_login_time" />
+        <property name="password" />
+        <property name="points" />
+        <property name="remoteServerPath" column="remote_server_path" />
+        <property name="theme" />
+        <property name="userName" column="user_name" unique="true" />
+        <property name="viewOptions" column="view_options" />
+    </class>
+</hibernate-mapping>

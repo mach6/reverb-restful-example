@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.mach6.reverb.models">
+    <class name="Collection" table="collection">
+        <id name="collectionId" column="collection_id" />
+        <property name="path" unique="true" />
+        <property name="trimPath" column="trim_path" />
+        <property name="infoType" column="info_type" />
+        <property name="useFolders" column="use_folders" />
+    </class>
+</hibernate-mapping>

@@ -20,28 +20,28 @@ import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
 import org.mach6.reverb.core.HibernateUtil;
-import org.mach6.reverb.models.Artist;
-import org.mach6.reverb.models.Artists;
+import org.mach6.reverb.models.Playlist;
+import org.mach6.reverb.models.Playlists;
 
-@Path("/artists")
-public class ArtistsResource {
+@Path("/playlists")
+public class PlaylistsResource {
     private static Session session = HibernateUtil.getSessionFactory().openSession();
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response getArtists() {
-        List<Artist> list = session.createQuery("FROM Artist").list();
-        Artists artists = new Artists();
-        artists.setArtist(list);
+    public Response getPlaylists() {
+        List<Playlist> list = session.createQuery("FROM Playlist").list();
+        Playlists playlists = new Playlists();
+        playlists.setPlaylist(list);
 
-        return Response.ok(artists).build();
+        return Response.ok(playlists).build();
     }
 
-    @Path("/{artist_id}")
+    @Path("/{playlist_id}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response getArtist(@PathParam("artist_id") int artistId) {
-        Artist artist = (Artist) session.byId(Artist.class).load(artistId);
-        return Response.ok(artist).build();
+    public Response getPlaylist(@PathParam("playlist_id") int playlistId) {
+        Playlist playlist = (Playlist) session.byId(Playlist.class).load(playlistId);
+        return Response.ok(playlist).build();
     }
 }

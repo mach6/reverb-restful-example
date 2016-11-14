@@ -20,28 +20,28 @@ import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
 import org.mach6.reverb.core.HibernateUtil;
-import org.mach6.reverb.models.Artist;
-import org.mach6.reverb.models.Artists;
+import org.mach6.reverb.models.Song;
+import org.mach6.reverb.models.Songs;
 
-@Path("/artists")
-public class ArtistsResource {
+@Path("/songs")
+public class SongsResource {
     private static Session session = HibernateUtil.getSessionFactory().openSession();
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response getArtists() {
-        List<Artist> list = session.createQuery("FROM Artist").list();
-        Artists artists = new Artists();
-        artists.setArtist(list);
+    public Response getSongs() {
+        List<Song> list = session.createQuery("FROM Song").list();
+        Songs songs = new Songs();
+        songs.setSong(list);
 
-        return Response.ok(artists).build();
+        return Response.ok(songs).build();
     }
 
-    @Path("/{artist_id}")
+    @Path("/{song_id}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response getArtist(@PathParam("artist_id") int artistId) {
-        Artist artist = (Artist) session.byId(Artist.class).load(artistId);
-        return Response.ok(artist).build();
+    public Response getSong(@PathParam("song_id") int songId) {
+        Song song = (Song) session.byId(Song.class).load(songId);
+        return Response.ok(song).build();
     }
 }

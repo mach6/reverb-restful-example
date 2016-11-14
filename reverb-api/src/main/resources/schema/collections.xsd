@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:annox="http://annox.dev.java.net" jaxb:extensionBindingPrefixes="annox inheritance"
+  xmlns:jx="http://annox.dev.java.net/javax.persistence" xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance">
+
+  <xs:include schemaLocation="reverb.xsd" />
+  <xs:include schemaLocation="genre.xsd" />
+  <xs:include schemaLocation="artist.xsd" />
+
+  <xs:element name="collection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:int" name="collection_id" />
+        <xs:element type="xs:string" name="path" />
+        <xs:element type="xs:boolean" name="trim_path" />
+        <xs:element type="xs:string" name="info_type" />
+        <xs:element type="xs:boolean" name="use_folders" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="user">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:int" name="user_id" />
+        <xs:element type="xs:string" name="user_name" />
+        <xs:element type="xs:string" name="full_name" />
+        <xs:element type="xs:string" name="email" />
+        <xs:element type="xs:string" name="password" />
+        <xs:element type="xs:string" name="access_level" />
+        <xs:element type="xs:string" name="local_server_path" />
+        <xs:element type="xs:string" name="remote_server_path" />
+        <xs:element type="xs:int" name="points" />
+        <xs:element type="xs:string" name="theme" />
+        <xs:element type="xs:string" name="view_options" />
+        <xs:element type="xs:string" name="last_login_time" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="user_stat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="user" maxOccurs="1" />
+        <xs:element type="xs:string" name="type" />
+        <xs:element type="xs:int" name="item_id" />
+        <xs:element type="xs:int" name="times_played" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="song">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:int" name="song_id" />
+        <xs:element type="xs:string" name="file_name" />
+        <xs:element type="xs:string" name="file_path" />
+        <xs:element type="xs:string" name="file_size" />
+        <xs:element type="xs:string" name="md5" />
+        <xs:element type="xs:string" name="mp3_layer_version" />
+        <xs:element type="xs:string" name="mp3_bitrate" />
+        <xs:element type="xs:string" name="mp3_frequency" />
+        <xs:element type="xs:string" name="mp3_mode" />
+        <xs:element type="xs:string" name="mp3_length" />
+        <xs:element ref="playlist" maxOccurs="unbounded" minOccurs="0" />
+        <xs:element ref="artist" maxOccurs="unbounded" minOccurs="0" />
+        <xs:element ref="genre" maxOccurs="unbounded" minOccurs="0" />
+        <xs:element ref="collection" maxOccurs="1" />
+        <xs:element type="xs:int" name="times_played" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="playlist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:int" name="playlist_id" />
+        <xs:element type="xs:string" name="name" />
+        <xs:element type="xs:int" name="user_id" />
+        <xs:element type="xs:string" name="type" />
+        <xs:element type="xs:int" name="total_tracks" />
+        <xs:element type="xs:int" name="times_played" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="collections">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="collection" maxOccurs="unbounded" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="users">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="user" maxOccurs="unbounded" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="user_stats">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="user_stat" maxOccurs="unbounded" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="songs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="song" maxOccurs="unbounded" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="playlists">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="playlist" maxOccurs="unbounded" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

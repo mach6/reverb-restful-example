@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.mach6.reverb.models">
+    <class name="Song" table="song">
+        <id name="songId" column="song_id" />
+        <property name="fileName" column="file_name" />
+        <property name="filePath" column="file_path" />
+        <property name="fileSize" column="file_size" />
+        <property name="md5" unique="true" />
+        <property name="mp3LayerVersion" column="mp3_layer_version" />
+        <property name="mp3Bitrate" column="mp3_bitrate" />
+        <property name="mp3Frequency" column="mp3_frequency" />
+        <property name="mp3Mode" column="mp3_mode" />
+        <property name="mp3Length" column="mp3_length" />
+        <property name="timesPlayed" column="times_played" />
+    </class>
+</hibernate-mapping>
